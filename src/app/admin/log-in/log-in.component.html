@@ -1,0 +1,67 @@
+<div class="container pt-3">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card-group">
+                <div class="card text-white bg-white d-md-down-none">
+                    <div class="card-body text-center align-self-center" style="background:#F5F5DC	">
+                        <img style="width:100%;height:100%;border-radius:50%;" src="../../../assets/img/logo0.jpg" />
+                        <div class="color-bk al">
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="background:#F0F8FF;">
+                    <div class="card-body">
+                        <div class="form-group input-group langouge" style="text-align:right">
+                            <div class="input-group-prepend">
+                                <div id="targetLanguage" class="input-group-text" style="background: none;">
+                                    <select id="language" name="Language" [(ngModel)]="loginData.language_shortCut" class="form-control" (change)="selectLanguage($event)">
+                                        <option value="ar">{{ localization[loginData.language_index].language }}</option>
+                                        <option value="ar">{{ localization[loginData.language_index].arabic }}</option>
+                                        <option value="en">{{ localization[loginData.language_index].english }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <h4 style="text-align:center;color:darkred">{{ localization[loginData.language_index].loginFormName }}</h4>
+                        
+                        <div class="form-group input-group iconuser">
+                            <div class="input-group-prepend">
+                                <span style="font-size: x-large;" class="input-group-text">
+                                    <i class="fa fa-user"></i>
+                                </span>
+                            </div>
+                            <input id="client_id" type="text" name="client_id" [(ngModel)]="loginData.client_id" class="form-control" placeholder="{{ localization[loginData.language_index].userName }}">
+                        </div>
+                        <br />
+                        <div class="input-group mb-4 iconuser">
+                            <div class="input-group-prepend">
+                                <span style="font-size: x-large;" class="input-group-text">
+                                    <i class="fa fa-key"></i>
+                                </span>
+                            </div>
+                            <input id="client_secret" type="password" name="client_secret" [(ngModel)]="loginData.client_secret" class="form-control" placeholder="{{ localization[loginData.language_index].password }}">
+                        </div>
+                        <!-- <div class="form-group input-group iconuser">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="background:none;">
+                                    <i style="color:darkred;font:small-caps bold 20px/1 sans-serif;">تذكرني</i>
+                                </span>
+                            </div>
+                            <input style="color:blue" type="checkbox">
+                            <button class="wordpass btn btn-link px-0" type="button">
+                                هل نسيت كلمة السر
+                            </button>
+                        </div> -->
+                        
+                        <div class="row" style="padding-bottom:10%">
+                            <div class="col-6">
+                                <button (click)="signInUser()" class="btn btn-info px-4" type="button" style="background:#124;color:#fff;border-radius:17%">{{ localization[loginData.language_index].signIn }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

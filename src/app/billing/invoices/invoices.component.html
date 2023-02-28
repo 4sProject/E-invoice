@@ -1,0 +1,97 @@
+<div class="container-fluid pt-4 px-4" style="direction: {{ loginData.html_direction }};">
+    <h4>{{ localization[loginData.language_index].invoices }}</h4><br />
+    <div class="row g-4" style="height: auto; border: solid 4px;">
+        <p-tabView>
+            <p-tabPanel header="{{ localization[loginData.language_index].sales }}">
+                <p-tabView (onChange)="getRecentDocuments($event.index)">
+                    <p-tabPanel header="{{ localization[loginData.language_index].validEInvoice }}">
+                        <p-table dataKey="name" [value]="documents"
+                                styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped" responsiveLayout="stack"
+                                [breakpoint]="'960px'" [scrollable]="true" scrollHeight="450px" [tableStyle]="{'min-width': '50rem'}">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>{{ localization[loginData.language_index].uuid }}</th>
+                                        <th>{{ localization[loginData.language_index].longId }}</th>
+                                        <th>{{ localization[loginData.language_index].internalId }}</th>
+                                        <th>{{ localization[loginData.language_index].submissionUUID }}</th>
+                                        <th>{{ localization[loginData.language_index].dateTimeIssued }}</th>
+                                        <th>{{ localization[loginData.language_index].dateTimeReceived }}</th>
+                                        <th>{{ localization[loginData.language_index].issuerName }}</th>
+                                        <th>{{ localization[loginData.language_index].receiverName }}</th>
+                                        <th>{{ localization[loginData.language_index].total }}</th>
+                                        <th>{{ localization[loginData.language_index].totalSales }}</th>
+                                        <th>{{ localization[loginData.language_index].totalDiscount }}</th>
+                                        <th>{{ localization[loginData.language_index].netAmount }}</th>
+                                        <th></th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-document let-rowIndex="rowIndex">
+                                    <tr>
+                                        <td>{{ document.uuid }}</td>
+                                        <td>{{ document.longId }}</td>
+                                        <td>{{ document.internalId }}</td>
+                                        <td>{{ document.submissionUUID }}</td>
+                                        <td>{{ document.dateTimeIssued }}</td>
+                                        <td>{{ document.dateTimeReceived }}</td>
+                                        <td>{{ document.issuerName }}</td>
+                                        <td>{{ document.receiverName }}</td>
+                                        <td>{{ document.total }}</td>
+                                        <td>{{ document.totalSales }}</td>
+                                        <td>{{ document.totalDiscount }}</td>
+                                        <td>{{ document.netAmount }}</td>
+                                        <td>
+                                            <a href="{{document.publicUrl}}">View</a> <br/>
+                                            <a href="#">Cancel</a> <br/>
+                                            <a href="#">Reject</a> <br/>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                        </p-table>
+                    </p-tabPanel>
+                    <p-tabPanel header="{{ localization[loginData.language_index].invalidEInvoice }}">
+                    </p-tabPanel>
+                    <p-tabPanel header="{{ localization[loginData.language_index].submittedEInvoice }}">
+                    </p-tabPanel>
+                    <p-tabPanel header="{{ localization[loginData.language_index].rejectedEInvoice }}">
+                    </p-tabPanel>
+                    <p-tabPanel header="{{ localization[loginData.language_index].cancelledEInvoice }}">
+                    </p-tabPanel>
+                    <p-tabPanel header="{{ localization[loginData.language_index].failedEInvoice }}">
+                        <p-table dataKey="name" [value]="eInvoicePayLoadRequest.documents"
+                                styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped" responsiveLayout="stack"
+                                [breakpoint]="'960px'" [scrollable]="true" scrollHeight="450px" [tableStyle]="{'min-width': '50rem'}">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>{{ localization[loginData.language_index].internalId }}</th>
+                                        <th>{{ localization[loginData.language_index].dateTimeIssued }}</th>
+                                        <th>{{ localization[loginData.language_index].issuerName }}</th>
+                                        <th>{{ localization[loginData.language_index].receiverName }}</th>
+                                        <th>{{ localization[loginData.language_index].total }}</th>
+                                        <th>{{ localization[loginData.language_index].totalSales }}</th>
+                                        <th>{{ localization[loginData.language_index].totalDiscount }}</th>
+                                        <th>{{ localization[loginData.language_index].netAmount }}</th>
+                                        <th>{{ localization[loginData.language_index].error }}</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-document let-rowIndex="rowIndex">
+                                    <tr>
+                                        <td>{{ document.internalId }}</td>
+                                        <td>{{ document.dateTimeIssued }}</td>
+                                        <td>{{ document.issuer.name }}</td>
+                                        <td>{{ document.receiver.name }}</td>
+                                        <td>{{ document.totalAmount }}</td>
+                                        <td>{{ document.totalSalesAmount }}</td>
+                                        <td>{{ document.totalDiscountAmount }}</td>
+                                        <td>{{ document.netAmount }}</td>
+                                        <td>{{ getErrorMessages(document.internalId) }}</td>
+                                    </tr>
+                                </ng-template>
+                        </p-table>
+                    </p-tabPanel>
+                </p-tabView>
+             </p-tabPanel>
+             <p-tabPanel header="{{ localization[loginData.language_index].purchases }}">
+             </p-tabPanel>
+        </p-tabView>
+    </div>
+</div>

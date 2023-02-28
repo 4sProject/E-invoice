@@ -1,0 +1,194 @@
+<div class="container-fluid pt-4 px-4" style="direction: {{ loginData.html_direction }};">
+    <h4>{{ localization[loginData.language_index].eReceipt }}</h4><br />
+    <div class="row g-4" style="height: auto; border: solid 4px;">
+        <p-tabView>
+            <p-tabPanel header="{{ localization[loginData.language_index].sales }}">
+                <p-tabView (onChange)="getRecentReceipts($event.index)">
+                    <p-tabPanel header="{{ localization[loginData.language_index].validEInvoice }}">
+                        <div class="row g-4">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="uuid">{{ localization[loginData.language_index].uuid }}</label>
+                                    <input id="uuid" type="text" name="uuid" [(ngModel)]="request.uuid" class="form-control"
+                                        placeholder="{{ localization[loginData.language_index].uuid }}">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="issuerId">{{ localization[loginData.language_index].issuerId }}</label>
+                                    <input id="issuerId" type="text" name="issuerId" [(ngModel)]="request.issuerId" class="form-control"
+                                        placeholder="{{ localization[loginData.language_index].issuerId }}">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="issuerName">{{ localization[loginData.language_index].issuerName }}</label>
+                                    <input id="issuerName" type="text" name="issuerName" [(ngModel)]="request.issuerName" class="form-control"
+                                        placeholder="{{ localization[loginData.language_index].issuerName }}">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="receiverId">{{ localization[loginData.language_index].receiverId }}</label>
+                                    <input id="receiverId" type="text" name="receiverId" [(ngModel)]="request.receiverId" class="form-control"
+                                        placeholder="{{ localization[loginData.language_index].receiverId }}">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="receiverName">{{ localization[loginData.language_index].receiverName }}</label>
+                                    <input id="receiverName" type="text" name="receiverName" [(ngModel)]="request.receiverName" class="form-control"
+                                        placeholder="{{ localization[loginData.language_index].receiverName }}">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="submissionUUID">{{ localization[loginData.language_index].submissionUUID }}</label>
+                                    <input id="submissionUUID" type="text" name="submissionUUID" [(ngModel)]="request.submissionUUID" class="form-control"
+                                        placeholder="{{ localization[loginData.language_index].submissionUUID }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-4">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="fromDateTimeIssued">{{ localization[loginData.language_index].fromDateTimeIssued }}</label>
+                                    <p-calendar inputId="fromDateTimeIssued" [(ngModel)]="request.fromDateTimeIssued" [readonlyInput]="true" ></p-calendar>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="toDateTimeIssued">{{ localization[loginData.language_index].toDateTimeIssued }}</label>
+                                    <!-- <p-calendar inputId="fromDateTimeIssued" [(ngModel)]="request.fromDateTimeIssued" [minDate]="minDate" [maxDate]="maxDate" [readonlyInput]="true" ></p-calendar> -->
+                                    <p-calendar inputId="toDateTimeIssued" [(ngModel)]="request.toDateTimeIssued" [minDate]="request.fromDateTimeIssued" [readonlyInput]="true" ></p-calendar>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="fromDateTimeReceived">{{ localization[loginData.language_index].fromDateTimeReceived }}</label>
+                                    <p-calendar inputId="fromDateTimeReceived" [(ngModel)]="request.fromDateTimeReceived" [readonlyInput]="true" ></p-calendar>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="toDateTimeReceived">{{ localization[loginData.language_index].toDateTimeReceived }}</label>
+                                    <!-- <p-calendar inputId="fromDateTimeIssued" [(ngModel)]="request.fromDateTimeIssued" [minDate]="minDate" [maxDate]="maxDate" [readonlyInput]="true" ></p-calendar> -->
+                                    <p-calendar inputId="toDateTimeReceived" [(ngModel)]="request.toDateTimeReceived" [minDate]="request.toDateTimeReceived" [readonlyInput]="true" ></p-calendar>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="paymentMethod">{{ localization[loginData.language_index].paymentMethod }}</label>
+                                    <p-dropdown [options]="paymentMethods" [(ngModel)]="request.paymentMethod" optionLabel="name" optionValue="code"></p-dropdown>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="receiptNumber">{{ localization[loginData.language_index].receiptNumber }}</label>
+                                    <input id="receiptNumber" type="text" name="receiptNumber" [(ngModel)]="request.receiptNumber" class="form-control"
+                                        placeholder="{{ localization[loginData.language_index].receiptNumber }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-4">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="submissionChannel">{{ localization[loginData.language_index].submissionChannel }}</label>
+                                    <p-dropdown [options]="submissionChannels" [(ngModel)]="request.submissionChannel" optionLabel="name" optionValue="code"></p-dropdown>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="deviceSerialNumber">{{ localization[loginData.language_index].deviceSerialNumber }}</label>
+                                    <input id="deviceSerialNumber" type="text" name="deviceSerialNumber" [(ngModel)]="request.deviceSerialNumber" class="form-control"
+                                        placeholder="{{ localization[loginData.language_index].deviceSerialNumber }}">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="receiverRegisterationNumber">{{ localization[loginData.language_index].receiverRegisterationNumber }}</label>
+                                    <input id="receiverRegisterationNumber" type="text" name="receiverRegisterationNumber" [(ngModel)]="request.receiverRegisterationNumber" class="form-control"
+                                        placeholder="{{ localization[loginData.language_index].receiverRegisterationNumber }}">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="direction">{{ localization[loginData.language_index].direction }}</label>
+                                    <p-dropdown [options]="directions" [(ngModel)]="request.direction" optionLabel="name" optionValue="code"></p-dropdown>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <button (click)="getRecentReceipts(0)" class="btn btn-info px-4" type="button"
+                                    style="background:#124; color:#fff; border-radius:17%; margin-top: 15%;">{{ localization[loginData.language_index].search}}
+                                </button>
+                            </div>
+                            <div class="col"></div>
+                        </div>
+                        <div class="row g-4">
+                            <p-table dataKey="name" [value]="receipts"
+                                styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped" responsiveLayout="stack"
+                                [breakpoint]="'960px'" [scrollable]="true" scrollHeight="450px" [tableStyle]="{'min-width': '50rem'}">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>{{ localization[loginData.language_index].uuid }}</th>
+                                        <th>{{ localization[loginData.language_index].submissionUUID }}</th>
+                                        <!-- <th>{{ localization[loginData.language_index].referenceUuid }}</th> -->
+                                        <th>{{ localization[loginData.language_index].direction }}</th>
+                                        <th>{{ localization[loginData.language_index].receiptNumber }}</th>
+                                        <th>{{ localization[loginData.language_index].dateTimeIssued }}</th>
+                                        <th>{{ localization[loginData.language_index].dateTimeReceived }}</th>
+                                        <th>{{ localization[loginData.language_index].netAmount }}</th>
+                                        <th>{{ localization[loginData.language_index].deviceSerialNumber }}</th>
+                                        <th>{{ localization[loginData.language_index].paymentMethod }}</th>
+                                        <!-- <th>{{ localization[loginData.language_index].submitterName }}</th> -->
+                                        <th>{{ localization[loginData.language_index].submissionChannel }}</th>
+                                        <th>{{ localization[loginData.language_index].issuerId }}</th>
+                                        <th>{{ localization[loginData.language_index].issuerName }}</th>
+                                        <th>{{ localization[loginData.language_index].receiverId }}</th>
+                                        <th>{{ localization[loginData.language_index].receiverName }}</th>
+                                        <th>{{ localization[loginData.language_index].currency }}</th>
+                                        <th>{{ localization[loginData.language_index].exchangeRate }}</th>
+                                        <th></th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-receipt let-rowIndex="rowIndex">
+                                    <tr>
+                                        <td>{{ receipt.uuid }}</td>
+                                        <td>{{ receipt.submissionUUID }}</td>
+                                        <!-- <td>{{ receipt.referenceUuid }}</td> -->
+                                        <td>{{ receipt.direction }}</td>
+                                        <td>{{ receipt.receiptNumber }}</td>
+                                        <td>{{ receipt.dateTimeIssued }}</td>
+                                        <td>{{ receipt.dateTimeReceived }}</td>
+                                        <td>{{ receipt.totalAmount }}</td>
+                                        <td>{{ receipt.posSerialNumber }}</td>
+                                        <td>{{ receipt.paymentMethod }}</td>
+                                        <!-- <td>{{ receipt.submitterName }}</td> -->
+                                        <td>{{ receipt.submissionChannel }}</td>
+                                        <td>{{ receipt.issuerId }}</td>
+                                        <td>{{ receipt.issuerName }}</td>
+                                        <td>{{ receipt.receiverId }}</td>
+                                        <td>{{ receipt.receiverName }}</td>
+                                        <td>{{ receipt.currency }}</td>
+                                        <td>{{ receipt.exchangeRate }}</td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                        </p-table>
+                        </div>
+                    </p-tabPanel>
+                    <p-tabPanel header="{{ localization[loginData.language_index].cancelledEInvoice }}">
+
+                    </p-tabPanel>
+                    <p-tabPanel header="{{ localization[loginData.language_index].failedEInvoice }}">
+
+                    </p-tabPanel>
+                </p-tabView>
+            </p-tabPanel>
+            <p-tabPanel header="{{ localization[loginData.language_index].purchases }}">
+                
+            </p-tabPanel>
+        </p-tabView>
+    </div>
+</div>
