@@ -10,7 +10,7 @@ export class PrepaireSystemComponent extends generalComponentImports.Hellper {
   //#region Declrations
   configurationDocument: any;
   connectionMessage: string = '';
-  isSuccessConnection: boolean = false;
+  isSuccessConnection: boolean = true;
   fieldDatabaseObjectName: string = '';
   //#endregion
   //#region Constructor

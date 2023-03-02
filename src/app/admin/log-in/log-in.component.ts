@@ -30,26 +30,20 @@ export class LogInComponent extends generalComponentImports.Hellper {
   signInUser(): void {
 
     if (this.loginData.client_id !== '') {
-      if (this.loginData.client_secret !== '') {
+      if (this.loginData.client_secret !== '') {        
         
-        this.service.executePostMethod('STORE_TRNS_M/GetAllDependancyRemaningQuantityTransactions', this.loginData).subscribe(
-          (response: any) => {
-            console.log(response);
-            debugger
-        });
-        
-        // this.service.executePostMethod('User/LogIn', this.loginData).subscribe(
-        //   (response: any) => {
-        //     if (response.result.errorNumber === 0) {
-        //       this.loginData.scope = response.data.scope;
-        //       this.loginData.expires_in = response.data.expires_in;
-        //       this.loginData.token_type = response.data.token_type;
-        //       this.loginData.access_token = response.data.access_token;
-        //       sessionStorage.setItem('loginData', JSON.stringify(this.loginData));
-        //       this.router.navigate(['/settings']);
-        //     }
-        //     else this.toastr.error(this.localization[this.loginData.language_index].invalidClient, this.localization[this.loginData.language_index].error);
-        // });
+        this.service.executePostMethod('User/LogIn', this.loginData).subscribe(
+           (response: any) => {
+             if (response.result.errorNumber === 0) {
+               this.loginData.scope = response.data.scope;
+               this.loginData.expires_in = response.data.expires_in;
+               this.loginData.token_type = response.data.token_type;
+               this.loginData.access_token = response.data.access_token;
+               sessionStorage.setItem('loginData', JSON.stringify(this.loginData));
+               this.router.navigate(['/settings']);
+             }
+             else this.toastr.error(this.localization[this.loginData.language_index].invalidClient, this.localization[this.loginData.language_index].error);
+         });
 
       }
       else this.toastr.error(this.localization[this.loginData.language_index].clientSecretReequired, this.localization[this.loginData.language_index].error);
