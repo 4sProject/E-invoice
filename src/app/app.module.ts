@@ -10,7 +10,8 @@ import { SettingsModule } from './settings/settings.module';
 import { EReceiptModule } from './ereceipt/ereceipt.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { CommonModule } from '@angular/common';
+ 
 @NgModule({
   declarations: [
     AppComponent
@@ -25,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
+    CommonModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }

@@ -1,3 +1,10 @@
+<div> 
+    <button id="Orical" (click)="ShowOrical()">Orical </button>  
+    <button id="Excel" (click)="ShowoExcel()">Excel</button>
+       
+</div>
+
+<ng-container *ngIf="divOrical">
 <div class="container-fluid pt-4 px-4" style="direction: {{ loginData.html_direction }};">
     <h4>{{ localization[loginData.language_index].settings }}</h4><br />
 
@@ -458,3 +465,18 @@
     </ng-container> -->
 
 </div>
+</ng-container>
+
+<ng-container *ngIf="divExcel">
+    <input type="file" name="file" class="custom-file-input" onchange="angular.element(this).scope().UploadFile(this.files)"  [(ngModel)]="request.excel"/>
+    <div class="col"> 
+        <input [(ngModel)]="request.ConnectionType" value="2">
+  
+        <button (click)="connectExcel()" class="btn btn-info px-4" type="button"
+        style="background:#124;color:#fff;border-radius:17%">{{ localization[loginData.language_index].connect
+        }}</button>
+    {{ connectionMessage }}
+
+    </div>
+    
+</ng-container>

@@ -28,6 +28,46 @@ export class PrepaireSystemComponent extends generalComponentImports.Hellper {
   //#region Angular Life Cycle
   //#endregion
   //#region Methods
+
+  divOrical:boolean=false;
+  divExcel:boolean=false;
+  
+  ShowOrical(){
+    this.divOrical=true;
+    this.divExcel=false;
+}
+
+  
+ShowoExcel(){
+  this.divOrical=false;
+  this.divExcel=true;
+}
+connectExcel():void{    
+    console.log(this.request)  
+    this.service.executePostMethod('Settings/ConnectDatabase', this.request).subscribe(
+      (response: any) => {
+        if (response.errorNumber === 0) {
+          this.isSuccessConnection = true;
+          this.connectionMessage = this.localization[this.loginData.language_index].success + this.localization[this.loginData.language_index].successConnectDatabase;
+          this.toastr.success(this.localization[this.loginData.language_index].successConnectDatabase, this.localization[this.loginData.language_index].success);
+
+          this.service.executeGetMethod('Settings/LoadConfigurationFile', '').subscribe(
+            (response: any) => {
+              if (response.result.errorNumber === 0) this.configurationDocument = response.data;
+          });
+
+        }
+        else {
+          this.isSuccessConnection = false;
+          this.connectionMessage = this.localization[this.loginData.language_index].error + this.localization[this.loginData.language_index].failConnectDatabase;
+          this.toastr.error(this.localization[this.loginData.language_index].failConnectDatabase, this.localization[this.loginData.language_index].error);
+        }
+      });
+
+
+}
+
+
   connectDatabase(): void {
     if (this.request.user_schema !== '') {
       if (this.request.password !== '') {
@@ -42,7 +82,7 @@ export class PrepaireSystemComponent extends generalComponentImports.Hellper {
                         this.isSuccessConnection = true;
                         this.connectionMessage = this.localization[this.loginData.language_index].success + this.localization[this.loginData.language_index].successConnectDatabase;
                         this.toastr.success(this.localization[this.loginData.language_index].successConnectDatabase, this.localization[this.loginData.language_index].success);
-
+                        console.log(this.request)
                         this.service.executeGetMethod('Settings/LoadConfigurationFile', '').subscribe(
                           (response: any) => {
                             if (response.result.errorNumber === 0) this.configurationDocument = response.data;
