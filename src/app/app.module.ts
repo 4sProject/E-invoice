@@ -11,6 +11,7 @@ import { EReceiptModule } from './ereceipt/ereceipt.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
+
  
 @NgModule({
   declarations: [

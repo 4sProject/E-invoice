@@ -6,11 +6,11 @@ import * as generalComponentImports from '../../general/general-component-import
   templateUrl: './prepaire-system.component.html',
   styleUrls: ['./prepaire-system.component.css']
 })
-export class PrepaireSystemComponent extends generalComponentImports.Hellper {
+export class PrepaireSystemComponent extends generalComponentImports.Hellper{
   //#region Declrations
   configurationDocument: any;
   connectionMessage: string = '';
-  isSuccessConnection: boolean = true;
+  isSuccessConnection: boolean = false;
   fieldDatabaseObjectName: string = '';
   //#endregion
   //#region Constructor
@@ -22,27 +22,32 @@ export class PrepaireSystemComponent extends generalComponentImports.Hellper {
     super();
     this.loginData = JSON.parse(sessionStorage['loginData']);
     if (this.loginData.access_token === '') this.router.navigate(['user/login']);
-    else this.request = { user_schema: 'Demo', password: 'demo', protocol: 'TCP', host: 'localhost', port: 1521, server: 'dedicated', service_name: 'orcl.docker.internal' };
+    else this.request = { user_schema: 'Demo', password: 'demo', protocol: 'TCP', host: '10.8.2.154', port: 1521, server: '10.8.2.154', service_name: 'dotnet.lehaa.local', ConnectionType :'1' , excel_link : '' };
   }
   //#endregion
   //#region Angular Life Cycle
   //#endregion
-  //#region Methods
+  //#region Methods  
 
-  divOrical:boolean=false;
+  divOracle:boolean=false;
   divExcel:boolean=false;
   
-  ShowOrical(){
-    this.divOrical=true;
+  ShowOracle(){
+    this.divOracle=true;
     this.divExcel=false;
-}
-
-  
-ShowoExcel(){
-  this.divOrical=false;
+    this.request = { user_schema: 'Demo', password: 'demo', protocol: 'TCP', host: '10.8.2.154', port: 1521, server: '10.8.2.154', service_name: 'dotnet.lehaa.local' , ConnectionType :'1' , excel_link : ''};
+    this.isSuccessConnection = false;
+    this.connectionMessage ='';
+  }  
+  ShowoExcel(){
+  this.divOracle=false;
   this.divExcel=true;
-}
-connectExcel():void{    
+  this.request = { user_schema: '', password: '', protocol: '', host: '', port: 0, server: '', service_name: '' , ConnectionType :'2', excel_link : '' };
+  this.isSuccessConnection = false;
+  this.connectionMessage ='';
+  }
+
+  connectExcel():void{    
     console.log(this.request)  
     this.service.executePostMethod('Settings/ConnectDatabase', this.request).subscribe(
       (response: any) => {
@@ -50,7 +55,7 @@ connectExcel():void{
           this.isSuccessConnection = true;
           this.connectionMessage = this.localization[this.loginData.language_index].success + this.localization[this.loginData.language_index].successConnectDatabase;
           this.toastr.success(this.localization[this.loginData.language_index].successConnectDatabase, this.localization[this.loginData.language_index].success);
-
+          console.log(this.request)
           this.service.executeGetMethod('Settings/LoadConfigurationFile', '').subscribe(
             (response: any) => {
               if (response.result.errorNumber === 0) this.configurationDocument = response.data;
@@ -63,12 +68,10 @@ connectExcel():void{
           this.toastr.error(this.localization[this.loginData.language_index].failConnectDatabase, this.localization[this.loginData.language_index].error);
         }
       });
-
-
-}
-
+  }
 
   connectDatabase(): void {
+    console.log(this.request)  
     if (this.request.user_schema !== '') {
       if (this.request.password !== '') {
         if (this.request.protocol !== '') {
@@ -121,13 +124,7 @@ connectExcel():void{
           });
         }
         else this.toastr.error(response.errorMessage, this.localization[this.loginData.language_index].error);
-    });
-    // if (field.databaseObjectName !== '') {
-    //   if (field.databaseColumnName !== ''){
-    //   }
-    //   else this.toastr.error(this.localization[this.loginData.language_index].fieldDatabaseColumnName + ' ' + field.name + this.localization[this.loginData.language_index].isRequired, this.localization[this.loginData.language_index].error);
-    // }
-    // else this.toastr.error(this.localization[this.loginData.language_index].fieldDatabaseObjectName + ' ' + field.name + this.localization[this.loginData.language_index].isRequired, this.localization[this.loginData.language_index].error);
+    });    
   }
   //#endregion
 }

@@ -1,13 +1,13 @@
 <div> 
-    <button id="Orical" (click)="ShowOrical()">Orical </button>  
-    <button id="Excel" (click)="ShowoExcel()">Excel</button>
+    <button id="Oracle" (click)="ShowOracle()"> Oracle </button>  
+    <button id="Excel" (click)="ShowoExcel()"> Excel </button>
        
 </div>
 
-<ng-container *ngIf="divOrical">
+<ng-container *ngIf="divOracle">
 <div class="container-fluid pt-4 px-4" style="direction: {{ loginData.html_direction }};">
     <h4>{{ localization[loginData.language_index].settings }}</h4><br />
-
+    
     <div class="row g-4" style="height: auto; border: solid 4px;">
         <div class="col">
             <div class="form-group">
@@ -70,184 +70,207 @@
             {{ connectionMessage }}
         </div>
     </div>
+    <br />
+    <br />
+    
+</div>
+</ng-container>
 
-    <!-- <div class="row g-4" style="height: auto; border: solid 4px;">
-        <div class="form-group">
-            <label for="fieldDatabaseObjectName">{{ localization[loginData.language_index].fieldDatabaseObjectName }}</label>
-            <input id="fieldDatabaseObjectName" type="text" name="fieldDatabaseObjectName" [(ngModel)]="fieldDatabaseObjectName" class="form-control" placeholder="{{ localization[loginData.language_index].fieldDatabaseObjectName }}">
-            <br />
-        </div>
-    </div>
-    <ng-container *ngIf="isSuccessConnection && fieldDatabaseObjectName != ''"></ng-container> -->
-
-
-    <ng-container *ngIf="isSuccessConnection">
+<ng-container *ngIf="divExcel">        
+    <div class="container-fluid pt-4 px-4" style="direction: {{ loginData.html_direction }};">
+        <h4>{{ localization[loginData.language_index].settings }}</h4><br />
+        
         <div class="row g-4" style="height: auto; border: solid 4px;">
-            <p-tabView>
-                <p-tabPanel header="{{ localization[loginData.language_index].eInvoiceConfiguration }}">
-                    <p-table dataKey="name" [value]="configurationDocument.invoice.fields"
-                        styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped" responsiveLayout="stack"
-                        [breakpoint]="'960px'" [scrollable]="true" scrollHeight="380px"
-                        [tableStyle]="{'min-width': '50rem'}">
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th style="width: 3rem"></th>
-                                <th>{{ localization[loginData.language_index].fieldName }}</th>
-                                <th>{{ localization[loginData.language_index].fieldDataType }}</th>
-                                <th>{{ localization[loginData.language_index].fieldIsStructureDataType }}</th>
-                                <th>{{ localization[loginData.language_index].fieldIsArray }}</th>
-                                <th>{{ localization[loginData.language_index].fieldIsRequired }}</th>
-                                <th>{{ localization[loginData.language_index].fieldValueExample }}</th>
-                                <th>{{ localization[loginData.language_index].fieldDescreption }}</th>
-                                <th>{{ localization[loginData.language_index].fieldDatabaseObjectName }}</th>
-                                <th>{{ localization[loginData.language_index].fieldDatabaseColumnName }}</th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-field let-expanded="expanded" let-rowIndex="rowIndex">
-                            <tr>
-                                <td>
-                                    <button *ngIf="field.childFields !== null && field.childFields?.length > 0"
-                                        type="button" pButton pRipple [pRowToggler]="field"
-                                        class="p-button-text p-button-rounded p-button-plain"
-                                        [icon]="expanded ? 'pi pi-chevron-up' : 'pi pi-chevron-down'"></button>
-                                </td>
-                                <td *ngIf="field.href === ''">{{ field.name }}</td>
-                                <td *ngIf="field.href !== ''"><a href="{{field.href}}">{{ field.name }}</a></td>
-                                <td>{{ field.dataType }}</td>
-                                <td>{{ field.isStructureDataType ? this.localization[this.loginData.language_index].yes
-                                    :
-                                    this.localization[this.loginData.language_index].no }}</td>
-                                <td>{{ field.isArray ? this.localization[this.loginData.language_index].yes :
-                                    this.localization[this.loginData.language_index].no }}</td>
-                                <td>{{ field.isRequired ? this.localization[this.loginData.language_index].yes :
-                                    this.localization[this.loginData.language_index].no }}</td>
-                                <td>{{ field.valueExample }}</td>
-                                <td>{{ field.descreption[this.loginData.language_index] }}</td>
-                                <td *ngIf="field.isStructureDataType"></td>
-                                <td *ngIf="field.isStructureDataType"></td>
-                                <td *ngIf="!field.isStructureDataType">
-                                    <input pInputText type="text" [(ngModel)]="field.databaseObjectName"
-                                        class="form-control" (change)="validateDatabaseObject($event, rowIndex, field)">
-                                </td>
-                                <td *ngIf="!field.isStructureDataType">
-                                    <input pInputText type="text" [(ngModel)]="field.databaseColumnName"
-                                        class="form-control" (change)="validateDatabaseObject($event, rowIndex, field)">
-                                </td>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="rowexpansion" let-field>
-                            <tr [style]="field.backgroundStyle">
-                                <td colspan="10">
-                                    <div class="p-p-3">
-                                        <p-table [value]="field.childFields" dataKey="name">
-                                            <ng-template pTemplate="header">
-                            <tr>
-                                <th style="width: 3rem"></th>
-                                <th>{{ localization[loginData.language_index].fieldName }}</th>
-                                <th>{{ localization[loginData.language_index].fieldDataType }}</th>
-                                <th>{{ localization[loginData.language_index].fieldIsStructureDataType }}</th>
-                                <th>{{ localization[loginData.language_index].fieldIsArray }}</th>
-                                <th>{{ localization[loginData.language_index].fieldIsRequired }}</th>
-                                <th>{{ localization[loginData.language_index].fieldValueExample }}</th>
-                                <th>{{ localization[loginData.language_index].fieldDescreption }}</th>
-                                <th>{{ localization[loginData.language_index].fieldDatabaseObjectName }}</th>
-                                <th>{{ localization[loginData.language_index].fieldDatabaseColumnName }}</th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-child let-expanded="expanded" let-rowIndex="rowIndex">
-                            <tr>
-                                <td>
-                                    <button *ngIf="child.childFields !== null && child.childFields?.length > 0"
-                                        type="button" pButton pRipple [pRowToggler]="child"
-                                        class="p-button-text p-button-rounded p-button-plain"
-                                        [icon]="expanded ? 'pi pi-chevron-up' : 'pi pi-chevron-down'"></button>
-                                </td>
-                                <td *ngIf="child.href === ''">{{ child.name }}</td>
-                                <td *ngIf="child.href !== ''"><a href="{{child.href}}">{{ child.name }}</a></td>
-                                <td>{{ child.dataType }}</td>
-                                <td>{{ child.isStructureDataType ? this.localization[this.loginData.language_index].yes
-                                    :
-                                    this.localization[this.loginData.language_index].no }}</td>
-                                <td>{{ child.isArray ? this.localization[this.loginData.language_index].yes :
-                                    this.localization[this.loginData.language_index].no }}</td>
-                                <td>{{ child.isRequired ? this.localization[this.loginData.language_index].yes :
-                                    this.localization[this.loginData.language_index].no }}</td>
-                                <td>{{ child.valueExample }}</td>
-                                <td>{{ child.descreption[this.loginData.language_index] }}</td>
-                                <td *ngIf="child.isStructureDataType"></td>
-                                <td *ngIf="child.isStructureDataType"></td>
-                                <td *ngIf="!child.isStructureDataType">
-                                    <input pInputText type="text" [(ngModel)]="child.databaseObjectName"
-                                        class="form-control" (change)="validateDatabaseObject($event, rowIndex, child)">
-                                </td>
-                                <td *ngIf="!child.isStructureDataType">
-                                    <input pInputText type="text" [(ngModel)]="child.databaseColumnName"
-                                        class="form-control" (change)="validateDatabaseObject($event, rowIndex, child)">
-                                </td>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="rowexpansion" let-child>
-                            <tr [style]="child.backgroundStyle">
-                                <td colspan="10">
-                                    <div class="p-p-3">
-                                        <p-table [value]="child.childFields" dataKey="name">
-                                            <ng-template pTemplate="header">
-                            <tr>
-                                <th>{{ localization[loginData.language_index].fieldName }}</th>
-                                <th>{{ localization[loginData.language_index].fieldDataType }}</th>
-                                <th>{{ localization[loginData.language_index].fieldIsStructureDataType }}</th>
-                                <th>{{ localization[loginData.language_index].fieldIsArray }}</th>
-                                <th>{{ localization[loginData.language_index].fieldIsRequired }}</th>
-                                <th>{{ localization[loginData.language_index].fieldValueExample }}</th>
-                                <th>{{ localization[loginData.language_index].fieldDescreption }}</th>
-                                <th>{{ localization[loginData.language_index].fieldDatabaseObjectName }}</th>
-                                <th>{{ localization[loginData.language_index].fieldDatabaseColumnName }}</th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-child2 let-rowIndex="rowIndex">
-                            <tr>
-                                <td *ngIf="child2.href === ''">{{ child2.name }}</td>
-                                <td *ngIf="child2.href !== ''"><a href="{{child2.href}}">{{ child2.name }}</a></td>
-                                <td>{{ child2.dataType }}</td>
-                                <td>{{ child2.isStructureDataType ? this.localization[this.loginData.language_index].yes
-                                    :
-                                    this.localization[this.loginData.language_index].no }}</td>
-                                <td>{{ child2.isArray ? this.localization[this.loginData.language_index].yes :
-                                    this.localization[this.loginData.language_index].no }}</td>
-                                <td>{{ child2.isRequired ? this.localization[this.loginData.language_index].yes :
-                                    this.localization[this.loginData.language_index].no }}</td>
-                                <td>{{ child2.valueExample }}</td>
-                                <td>{{ child2.descreption[this.loginData.language_index] }}</td>
-                                <td *ngIf="child2.isStructureDataType"></td>
-                                <td *ngIf="child2.isStructureDataType"></td>
-                                <td *ngIf="!child2.isStructureDataType">
-                                    <input pInputText type="text" [(ngModel)]="child2.databaseObjectName"
-                                        class="form-control"
-                                        (change)="validateDatabaseObject($event, rowIndex, child2)">
-                                </td>
-                                <td *ngIf="!child2.isStructureDataType">
-                                    <input pInputText type="text" [(ngModel)]="child2.databaseColumnName"
-                                        class="form-control"
-                                        (change)="validateDatabaseObject($event, rowIndex, child2)">
-                                </td>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="emptymessage">
-                            <tr>
-                                <td colspan="6">There are no order for this product yet.</td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
+            <div class="col">
+                <div class="form-group">
+                    <label for="excel_link">{{ localization[loginData.language_index].excel_link }}</label>
+                    <input id="excel_link" type="text" name="excel_link" [(ngModel)]="request.excel_link"
+                        class="form-control" placeholder="{{ localization[loginData.language_index].excel_link }}">
+                </div>
+                <br />
+            </div>
         </div>
-        </td>
+    
+        <div class="row g-4" style="height: auto; border: solid 4px;">
+            <div class="col">           
+                <button (click)="connectExcel()" class="btn btn-info px-4" type="button"
+                style="background:#124;color:#fff;border-radius:17%">{{ localization[loginData.language_index].connect
+                }}</button>
+            {{ connectionMessage }}
+
+            </div>
+        </div>
+        <br />
+        <br />
+    </div>
+</ng-container>
+
+
+<ng-container *ngIf="isSuccessConnection">
+    <div class="row g-4" style="height: auto; border: solid 4px;">
+        <p-tabView>
+            <p-tabPanel header="{{ localization[loginData.language_index].eInvoiceConfiguration }}">
+                <p-table dataKey="name" [value]="configurationDocument.invoice.fields"
+                    styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped" responsiveLayout="stack"
+                    [breakpoint]="'960px'" [scrollable]="true" scrollHeight="380px"
+                    [tableStyle]="{'min-width': '50rem'}">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem"></th>
+                            <th>{{ localization[loginData.language_index].fieldName }}</th>
+                            <th>{{ localization[loginData.language_index].fieldDataType }}</th>
+                            <th>{{ localization[loginData.language_index].fieldIsStructureDataType }}</th>
+                            <th>{{ localization[loginData.language_index].fieldIsArray }}</th>
+                            <th>{{ localization[loginData.language_index].fieldIsRequired }}</th>
+                            <th>{{ localization[loginData.language_index].fieldValueExample }}</th>
+                            <th>{{ localization[loginData.language_index].fieldDescreption }}</th>
+                            <th>{{ localization[loginData.language_index].fieldDatabaseObjectName }}</th>
+                            <th>{{ localization[loginData.language_index].fieldDatabaseColumnName }}</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-field let-expanded="expanded" let-rowIndex="rowIndex">
+                        <tr>
+                            <td>
+                                <button *ngIf="field.childFields !== null && field.childFields?.length > 0"
+                                    type="button" pButton pRipple [pRowToggler]="field"
+                                    class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="expanded ? 'pi pi-chevron-up' : 'pi pi-chevron-down'"></button>
+                            </td>
+                            <td *ngIf="field.href === ''">{{ field.name }}</td>
+                            <td *ngIf="field.href !== ''"><a href="{{field.href}}">{{ field.name }}</a></td>
+                            <td>{{ field.dataType }}</td>
+                            <td>{{ field.isStructureDataType ? this.localization[this.loginData.language_index].yes
+                                :
+                                this.localization[this.loginData.language_index].no }}</td>
+                            <td>{{ field.isArray ? this.localization[this.loginData.language_index].yes :
+                                this.localization[this.loginData.language_index].no }}</td>
+                            <td>{{ field.isRequired ? this.localization[this.loginData.language_index].yes :
+                                this.localization[this.loginData.language_index].no }}</td>
+                            <td>{{ field.valueExample }}</td>
+                            <td>{{ field.descreption[this.loginData.language_index] }}</td>                             
+                            <td  >
+                                <input pInputText type="text" [(ngModel)]="field.databaseObjectName"
+                                    class="form-control" (change)="validateDatabaseObject($event, rowIndex, field)">
+                            </td>
+                            <td  >
+                                <input pInputText type="text" [(ngModel)]="field.databaseColumnName"
+                                    class="form-control" (change)="validateDatabaseObject($event, rowIndex, field)">
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="rowexpansion" let-field>
+                        <tr [style]="field.backgroundStyle">
+                            <td colspan="10">
+                                <div class="p-p-3">
+                                    <p-table [value]="field.childFields" dataKey="name">
+                                        <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem"></th>
+                            <th>{{ localization[loginData.language_index].fieldName }}</th>
+                            <th>{{ localization[loginData.language_index].fieldDataType }}</th>
+                            <th>{{ localization[loginData.language_index].fieldIsStructureDataType }}</th>
+                            <th>{{ localization[loginData.language_index].fieldIsArray }}</th>
+                            <th>{{ localization[loginData.language_index].fieldIsRequired }}</th>
+                            <th>{{ localization[loginData.language_index].fieldValueExample }}</th>
+                            <th>{{ localization[loginData.language_index].fieldDescreption }}</th>
+                            <th>{{ localization[loginData.language_index].fieldDatabaseObjectName }}</th>
+                            <th>{{ localization[loginData.language_index].fieldDatabaseColumnName }}</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-child let-expanded="expanded" let-rowIndex="rowIndex">
+                        <tr>
+                            <td>
+                                <button *ngIf="child.childFields !== null && child.childFields?.length > 0"
+                                    type="button" pButton pRipple [pRowToggler]="child"
+                                    class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="expanded ? 'pi pi-chevron-up' : 'pi pi-chevron-down'"></button>
+                            </td>
+                            <td *ngIf="child.href === ''">{{ child.name }}</td>
+                            <td *ngIf="child.href !== ''"><a href="{{child.href}}">{{ child.name }}</a></td>
+                            <td>{{ child.dataType }}</td>
+                            <td>{{ child.isStructureDataType ? this.localization[this.loginData.language_index].yes
+                                :
+                                this.localization[this.loginData.language_index].no }}</td>
+                            <td>{{ child.isArray ? this.localization[this.loginData.language_index].yes :
+                                this.localization[this.loginData.language_index].no }}</td>
+                            <td>{{ child.isRequired ? this.localization[this.loginData.language_index].yes :
+                                this.localization[this.loginData.language_index].no }}</td>
+                            <td>{{ child.valueExample }}</td>
+                            <td>{{ child.descreption[this.loginData.language_index] }}</td>
+                            <td *ngIf="child.isStructureDataType"></td>
+                            <td *ngIf="child.isStructureDataType"></td>
+                            <td *ngIf="!child.isStructureDataType">
+                                <input pInputText type="text" [(ngModel)]="child.databaseObjectName"
+                                    class="form-control" (change)="validateDatabaseObject($event, rowIndex, child)">
+                            </td>
+                            <td *ngIf="!child.isStructureDataType">
+                                <input pInputText type="text" [(ngModel)]="child.databaseColumnName"
+                                    class="form-control" (change)="validateDatabaseObject($event, rowIndex, child)">
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="rowexpansion" let-child>
+                        <tr [style]="child.backgroundStyle">
+                            <td colspan="10">
+                                <div class="p-p-3">
+                                    <p-table [value]="child.childFields" dataKey="name">
+                                        <ng-template pTemplate="header">
+                        <tr>
+                            <th>{{ localization[loginData.language_index].fieldName }}</th>
+                            <th>{{ localization[loginData.language_index].fieldDataType }}</th>
+                            <th>{{ localization[loginData.language_index].fieldIsStructureDataType }}</th>
+                            <th>{{ localization[loginData.language_index].fieldIsArray }}</th>
+                            <th>{{ localization[loginData.language_index].fieldIsRequired }}</th>
+                            <th>{{ localization[loginData.language_index].fieldValueExample }}</th>
+                            <th>{{ localization[loginData.language_index].fieldDescreption }}</th>
+                            <th>{{ localization[loginData.language_index].fieldDatabaseObjectName }}</th>
+                            <th>{{ localization[loginData.language_index].fieldDatabaseColumnName }}</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-child2 let-rowIndex="rowIndex">
+                        <tr>
+                            <td *ngIf="child2.href === ''">{{ child2.name }}</td>
+                            <td *ngIf="child2.href !== ''"><a href="{{child2.href}}">{{ child2.name }}</a></td>
+                            <td>{{ child2.dataType }}</td>
+                            <td>{{ child2.isStructureDataType ? this.localization[this.loginData.language_index].yes
+                                :
+                                this.localization[this.loginData.language_index].no }}</td>
+                            <td>{{ child2.isArray ? this.localization[this.loginData.language_index].yes :
+                                this.localization[this.loginData.language_index].no }}</td>
+                            <td>{{ child2.isRequired ? this.localization[this.loginData.language_index].yes :
+                                this.localization[this.loginData.language_index].no }}</td>
+                            <td>{{ child2.valueExample }}</td>
+                            <td>{{ child2.descreption[this.loginData.language_index] }}</td>
+                            <td *ngIf="child2.isStructureDataType"></td>
+                            <td *ngIf="child2.isStructureDataType"></td>
+                            <td *ngIf="!child2.isStructureDataType">
+                                <input pInputText type="text" [(ngModel)]="child2.databaseObjectName"
+                                    class="form-control"
+                                    (change)="validateDatabaseObject($event, rowIndex, child2)">
+                            </td>
+                            <td *ngIf="!child2.isStructureDataType">
+                                <input pInputText type="text" [(ngModel)]="child2.databaseColumnName"
+                                    class="form-control"
+                                    (change)="validateDatabaseObject($event, rowIndex, child2)">
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="6">There are no order for this product yet.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+    </div>
+    </td>
+    </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="6">There are no order for this product yet.</td>
         </tr>
-        </ng-template>
-        <ng-template pTemplate="emptymessage">
-            <tr>
-                <td colspan="6">There are no order for this product yet.</td>
-            </tr>
-        </ng-template>
-        </p-table>
+    </ng-template>
+    </p-table>
 </div>
 </td>
 </tr>
@@ -263,169 +286,167 @@
 <p-tabPanel header="{{ localization[loginData.language_index].posConfiguration }}">
 </p-tabPanel>
 <p-tabPanel header="{{ localization[loginData.language_index].eReceiptConfiguration }}">
-    <p-table dataKey="name" [value]="configurationDocument.receipt.fields"
-                        styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped" responsiveLayout="stack"
-                        [breakpoint]="'960px'" [scrollable]="true" scrollHeight="380px"
-                        [tableStyle]="{'min-width': '50rem'}">
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th style="width: 3rem"></th>
-                                <th>{{ localization[loginData.language_index].fieldName }}</th>
-                                <th>{{ localization[loginData.language_index].fieldDataType }}</th>
-                                <th>{{ localization[loginData.language_index].fieldIsStructureDataType }}</th>
-                                <th>{{ localization[loginData.language_index].fieldIsArray }}</th>
-                                <th>{{ localization[loginData.language_index].fieldIsRequired }}</th>
-                                <th>{{ localization[loginData.language_index].fieldValueExample }}</th>
-                                <th>{{ localization[loginData.language_index].fieldDescreption }}</th>
-                                <th>{{ localization[loginData.language_index].fieldDatabaseObjectName }}</th>
-                                <th>{{ localization[loginData.language_index].fieldDatabaseColumnName }}</th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-field let-expanded="expanded" let-rowIndex="rowIndex">
-                            <tr>
-                                <td>
-                                    <button *ngIf="field.childFields !== null && field.childFields?.length > 0"
-                                        type="button" pButton pRipple [pRowToggler]="field"
-                                        class="p-button-text p-button-rounded p-button-plain"
-                                        [icon]="expanded ? 'pi pi-chevron-up' : 'pi pi-chevron-down'"></button>
-                                </td>
-                                <td *ngIf="field.href === ''">{{ field.name }}</td>
-                                <td *ngIf="field.href !== ''"><a href="{{field.href}}">{{ field.name }}</a></td>
-                                <td>{{ field.dataType }}</td>
-                                <td>{{ field.isStructureDataType ? this.localization[this.loginData.language_index].yes
-                                    :
-                                    this.localization[this.loginData.language_index].no }}</td>
-                                <td>{{ field.isArray ? this.localization[this.loginData.language_index].yes :
-                                    this.localization[this.loginData.language_index].no }}</td>
-                                <td>{{ field.isRequired ? this.localization[this.loginData.language_index].yes :
-                                    this.localization[this.loginData.language_index].no }}</td>
-                                <td>{{ field.valueExample }}</td>
-                                <td>{{ field.descreption[this.loginData.language_index] }}</td>
-                                <td *ngIf="field.isStructureDataType"></td>
-                                <td *ngIf="field.isStructureDataType"></td>
-                                <td *ngIf="!field.isStructureDataType">
-                                    <input pInputText type="text" [(ngModel)]="field.databaseObjectName"
-                                        class="form-control" (change)="validateDatabaseObject($event, rowIndex, field)">
-                                </td>
-                                <td *ngIf="!field.isStructureDataType">
-                                    <input pInputText type="text" [(ngModel)]="field.databaseColumnName"
-                                        class="form-control" (change)="validateDatabaseObject($event, rowIndex, field)">
-                                </td>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="rowexpansion" let-field>
-                            <tr [style]="field.backgroundStyle">
-                                <td colspan="10">
-                                    <div class="p-p-3">
-                                        <p-table [value]="field.childFields" dataKey="name">
-                                            <ng-template pTemplate="header">
-                            <tr>
-                                <th style="width: 3rem"></th>
-                                <th>{{ localization[loginData.language_index].fieldName }}</th>
-                                <th>{{ localization[loginData.language_index].fieldDataType }}</th>
-                                <th>{{ localization[loginData.language_index].fieldIsStructureDataType }}</th>
-                                <th>{{ localization[loginData.language_index].fieldIsArray }}</th>
-                                <th>{{ localization[loginData.language_index].fieldIsRequired }}</th>
-                                <th>{{ localization[loginData.language_index].fieldValueExample }}</th>
-                                <th>{{ localization[loginData.language_index].fieldDescreption }}</th>
-                                <th>{{ localization[loginData.language_index].fieldDatabaseObjectName }}</th>
-                                <th>{{ localization[loginData.language_index].fieldDatabaseColumnName }}</th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-child let-expanded="expanded" let-rowIndex="rowIndex">
-                            <tr>
-                                <td>
-                                    <button *ngIf="child.childFields !== null && child.childFields?.length > 0"
-                                        type="button" pButton pRipple [pRowToggler]="child"
-                                        class="p-button-text p-button-rounded p-button-plain"
-                                        [icon]="expanded ? 'pi pi-chevron-up' : 'pi pi-chevron-down'"></button>
-                                </td>
-                                <td *ngIf="child.href === ''">{{ child.name }}</td>
-                                <td *ngIf="child.href !== ''"><a href="{{child.href}}">{{ child.name }}</a></td>
-                                <td>{{ child.dataType }}</td>
-                                <td>{{ child.isStructureDataType ? this.localization[this.loginData.language_index].yes
-                                    :
-                                    this.localization[this.loginData.language_index].no }}</td>
-                                <td>{{ child.isArray ? this.localization[this.loginData.language_index].yes :
-                                    this.localization[this.loginData.language_index].no }}</td>
-                                <td>{{ child.isRequired ? this.localization[this.loginData.language_index].yes :
-                                    this.localization[this.loginData.language_index].no }}</td>
-                                <td>{{ child.valueExample }}</td>
-                                <td>{{ child.descreption[this.loginData.language_index] }}</td>
-                                <td *ngIf="child.isStructureDataType"></td>
-                                <td *ngIf="child.isStructureDataType"></td>
-                                <td *ngIf="!child.isStructureDataType">
-                                    <input pInputText type="text" [(ngModel)]="child.databaseObjectName"
-                                        class="form-control" (change)="validateDatabaseObject($event, rowIndex, child)">
-                                </td>
-                                <td *ngIf="!child.isStructureDataType">
-                                    <input pInputText type="text" [(ngModel)]="child.databaseColumnName"
-                                        class="form-control" (change)="validateDatabaseObject($event, rowIndex, child)">
-                                </td>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="rowexpansion" let-child>
-                            <tr [style]="child.backgroundStyle">
-                                <td colspan="10">
-                                    <div class="p-p-3">
-                                        <p-table [value]="child.childFields" dataKey="name">
-                                            <ng-template pTemplate="header">
-                            <tr>
-                                <th>{{ localization[loginData.language_index].fieldName }}</th>
-                                <th>{{ localization[loginData.language_index].fieldDataType }}</th>
-                                <th>{{ localization[loginData.language_index].fieldIsStructureDataType }}</th>
-                                <th>{{ localization[loginData.language_index].fieldIsArray }}</th>
-                                <th>{{ localization[loginData.language_index].fieldIsRequired }}</th>
-                                <th>{{ localization[loginData.language_index].fieldValueExample }}</th>
-                                <th>{{ localization[loginData.language_index].fieldDescreption }}</th>
-                                <th>{{ localization[loginData.language_index].fieldDatabaseObjectName }}</th>
-                                <th>{{ localization[loginData.language_index].fieldDatabaseColumnName }}</th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-child2 let-rowIndex="rowIndex">
-                            <tr>
-                                <td *ngIf="child2.href === ''">{{ child2.name }}</td>
-                                <td *ngIf="child2.href !== ''"><a href="{{child2.href}}">{{ child2.name }}</a></td>
-                                <td>{{ child2.dataType }}</td>
-                                <td>{{ child2.isStructureDataType ? this.localization[this.loginData.language_index].yes
-                                    :
-                                    this.localization[this.loginData.language_index].no }}</td>
-                                <td>{{ child2.isArray ? this.localization[this.loginData.language_index].yes :
-                                    this.localization[this.loginData.language_index].no }}</td>
-                                <td>{{ child2.isRequired ? this.localization[this.loginData.language_index].yes :
-                                    this.localization[this.loginData.language_index].no }}</td>
-                                <td>{{ child2.valueExample }}</td>
-                                <td>{{ child2.descreption[this.loginData.language_index] }}</td>
-                                <td *ngIf="child2.isStructureDataType"></td>
-                                <td *ngIf="child2.isStructureDataType"></td>
-                                <td *ngIf="!child2.isStructureDataType">
-                                    <input pInputText type="text" [(ngModel)]="child2.databaseObjectName"
-                                        class="form-control"
-                                        (change)="validateDatabaseObject($event, rowIndex, child2)">
-                                </td>
-                                <td *ngIf="!child2.isStructureDataType">
-                                    <input pInputText type="text" [(ngModel)]="child2.databaseColumnName"
-                                        class="form-control"
-                                        (change)="validateDatabaseObject($event, rowIndex, child2)">
-                                </td>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="emptymessage">
-                            <tr>
-                                <td colspan="6">There are no order for this product yet.</td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
-        </div>
-        </td>
+<p-table dataKey="name" [value]="configurationDocument.receipt.fields"
+                    styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped" responsiveLayout="stack"
+                    [breakpoint]="'960px'" [scrollable]="true" scrollHeight="380px"
+                    [tableStyle]="{'min-width': '50rem'}">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem"></th>
+                            <th>{{ localization[loginData.language_index].fieldName }}</th>
+                            <th>{{ localization[loginData.language_index].fieldDataType }}</th>
+                            <th>{{ localization[loginData.language_index].fieldIsStructureDataType }}</th>
+                            <th>{{ localization[loginData.language_index].fieldIsArray }}</th>
+                            <th>{{ localization[loginData.language_index].fieldIsRequired }}</th>
+                            <th>{{ localization[loginData.language_index].fieldValueExample }}</th>
+                            <th>{{ localization[loginData.language_index].fieldDescreption }}</th>
+                            <th>{{ localization[loginData.language_index].fieldDatabaseObjectName }}</th>
+                            <th>{{ localization[loginData.language_index].fieldDatabaseColumnName }}</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-field let-expanded="expanded" let-rowIndex="rowIndex">
+                        <tr>
+                            <td>
+                                <button *ngIf="field.childFields !== null && field.childFields?.length > 0"
+                                    type="button" pButton pRipple [pRowToggler]="field"
+                                    class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="expanded ? 'pi pi-chevron-up' : 'pi pi-chevron-down'"></button>
+                            </td>
+                            <td *ngIf="field.href === ''">{{ field.name }}</td>
+                            <td *ngIf="field.href !== ''"><a href="{{field.href}}">{{ field.name }}</a></td>
+                            <td>{{ field.dataType }}</td>
+                            <td>{{ field.isStructureDataType ? this.localization[this.loginData.language_index].yes
+                                :
+                                this.localization[this.loginData.language_index].no }}</td>
+                            <td>{{ field.isArray ? this.localization[this.loginData.language_index].yes :
+                                this.localization[this.loginData.language_index].no }}</td>
+                            <td>{{ field.isRequired ? this.localization[this.loginData.language_index].yes :
+                                this.localization[this.loginData.language_index].no }}</td>
+                            <td>{{ field.valueExample }}</td>
+                            <td>{{ field.descreption[this.loginData.language_index] }}</td>                                                          
+                            <td  >
+                                <input pInputText type="text" [(ngModel)]="field.databaseObjectName"
+                                    class="form-control" (change)="validateDatabaseObject($event, rowIndex, field)">
+                            </td>
+                            <td  >
+                                <input pInputText type="text" [(ngModel)]="field.databaseColumnName"
+                                    class="form-control" (change)="validateDatabaseObject($event, rowIndex, field)">
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="rowexpansion" let-field>
+                        <tr [style]="field.backgroundStyle">
+                            <td colspan="10">
+                                <div class="p-p-3">
+                                    <p-table [value]="field.childFields" dataKey="name">
+                                        <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem"></th>
+                            <th>{{ localization[loginData.language_index].fieldName }}</th>
+                            <th>{{ localization[loginData.language_index].fieldDataType }}</th>
+                            <th>{{ localization[loginData.language_index].fieldIsStructureDataType }}</th>
+                            <th>{{ localization[loginData.language_index].fieldIsArray }}</th>
+                            <th>{{ localization[loginData.language_index].fieldIsRequired }}</th>
+                            <th>{{ localization[loginData.language_index].fieldValueExample }}</th>
+                            <th>{{ localization[loginData.language_index].fieldDescreption }}</th>
+                            <th>{{ localization[loginData.language_index].fieldDatabaseObjectName }}</th>
+                            <th>{{ localization[loginData.language_index].fieldDatabaseColumnName }}</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-child let-expanded="expanded" let-rowIndex="rowIndex">
+                        <tr>
+                            <td>
+                                <button *ngIf="child.childFields !== null && child.childFields?.length > 0"
+                                    type="button" pButton pRipple [pRowToggler]="child"
+                                    class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="expanded ? 'pi pi-chevron-up' : 'pi pi-chevron-down'"></button>
+                            </td>
+                            <td *ngIf="child.href === ''">{{ child.name }}</td>
+                            <td *ngIf="child.href !== ''"><a href="{{child.href}}">{{ child.name }}</a></td>
+                            <td>{{ child.dataType }}</td>
+                            <td>{{ child.isStructureDataType ? this.localization[this.loginData.language_index].yes
+                                :
+                                this.localization[this.loginData.language_index].no }}</td>
+                            <td>{{ child.isArray ? this.localization[this.loginData.language_index].yes :
+                                this.localization[this.loginData.language_index].no }}</td>
+                            <td>{{ child.isRequired ? this.localization[this.loginData.language_index].yes :
+                                this.localization[this.loginData.language_index].no }}</td>
+                            <td>{{ child.valueExample }}</td>
+                            <td>{{ child.descreption[this.loginData.language_index] }}</td>
+                            <td *ngIf="child.isStructureDataType"></td>
+                            <td *ngIf="child.isStructureDataType"></td>
+                            <td *ngIf="!child.isStructureDataType">
+                                <input pInputText type="text" [(ngModel)]="child.databaseObjectName"
+                                    class="form-control" (change)="validateDatabaseObject($event, rowIndex, child)">
+                            </td>
+                            <td *ngIf="!child.isStructureDataType">
+                                <input pInputText type="text" [(ngModel)]="child.databaseColumnName"
+                                    class="form-control" (change)="validateDatabaseObject($event, rowIndex, child)">
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="rowexpansion" let-child>
+                        <tr [style]="child.backgroundStyle">
+                            <td colspan="10">
+                                <div class="p-p-3">
+                                    <p-table [value]="child.childFields" dataKey="name">
+                                        <ng-template pTemplate="header">
+                        <tr>
+                            <th>{{ localization[loginData.language_index].fieldName }}</th>
+                            <th>{{ localization[loginData.language_index].fieldDataType }}</th>
+                            <th>{{ localization[loginData.language_index].fieldIsStructureDataType }}</th>
+                            <th>{{ localization[loginData.language_index].fieldIsArray }}</th>
+                            <th>{{ localization[loginData.language_index].fieldIsRequired }}</th>
+                            <th>{{ localization[loginData.language_index].fieldValueExample }}</th>
+                            <th>{{ localization[loginData.language_index].fieldDescreption }}</th>
+                            <th>{{ localization[loginData.language_index].fieldDatabaseObjectName }}</th>
+                            <th>{{ localization[loginData.language_index].fieldDatabaseColumnName }}</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-child2 let-rowIndex="rowIndex">
+                        <tr>
+                            <td *ngIf="child2.href === ''">{{ child2.name }}</td>
+                            <td *ngIf="child2.href !== ''"><a href="{{child2.href}}">{{ child2.name }}</a></td>
+                            <td>{{ child2.dataType }}</td>
+                            <td>{{ child2.isStructureDataType ? this.localization[this.loginData.language_index].yes
+                                :
+                                this.localization[this.loginData.language_index].no }}</td>
+                            <td>{{ child2.isArray ? this.localization[this.loginData.language_index].yes :
+                                this.localization[this.loginData.language_index].no }}</td>
+                            <td>{{ child2.isRequired ? this.localization[this.loginData.language_index].yes :
+                                this.localization[this.loginData.language_index].no }}</td>
+                            <td>{{ child2.valueExample }}</td>
+                            <td>{{ child2.descreption[this.loginData.language_index] }}</td>
+                            <td *ngIf="child2.isStructureDataType"></td>
+                            <td *ngIf="child2.isStructureDataType"></td>
+                            <td *ngIf="!child2.isStructureDataType">
+                                <input pInputText type="text" [(ngModel)]="child2.databaseObjectName"
+                                    class="form-control"
+                                    (change)="validateDatabaseObject($event, rowIndex, child2)">
+                            </td>
+                            <td *ngIf="!child2.isStructureDataType">
+                                <input pInputText type="text" [(ngModel)]="child2.databaseColumnName"
+                                    class="form-control"
+                                    (change)="validateDatabaseObject($event, rowIndex, child2)">
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="6">There are no order for this product yet.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+    </div>
+    </td>
+    </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="6">There are no order for this product yet.</td>
         </tr>
-        </ng-template>
-        <ng-template pTemplate="emptymessage">
-            <tr>
-                <td colspan="6">There are no order for this product yet.</td>
-            </tr>
-        </ng-template>
-        </p-table>
+    </ng-template>
+    </p-table>
 </div>
 </td>
 </tr>
@@ -435,48 +456,4 @@
 
 </p-tabView>
 </div>
-</ng-container>
-
-<!--  -->
-
-<!-- 
-        
-
-        <div class="row g-4" style="height: auto; border: solid 4px;">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col" class="th-sm">{{ localization[loginData.language_index].fieldName }}</th>
-                        <th scope="col" class="th-sm">{{ localization[loginData.language_index].fieldDataType }}</th>
-                        <th scope="col" class="th-sm">{{ localization[loginData.language_index].fieldIsStructureDataType }}</th>
-                        <th scope="col" class="th-sm">{{ localization[loginData.language_index].fieldIsArray }}</th>
-                        <th scope="col" class="th-sm">{{ localization[loginData.language_index].fieldIsRequired }}</th>
-                        <th scope="col" class="th-sm">{{ localization[loginData.language_index].fieldValueExample }}</th>
-                        <th scope="col" class="th-sm">{{ localization[loginData.language_index].fieldDescreption }}</th>
-                        <th scope="col" class="th-lg">{{ localization[loginData.language_index].fieldDatabaseObjectName }}</th>
-                        <th scope="col" class="th-lg">{{ localization[loginData.language_index].fieldDatabaseColumnName }}</th>
-                      </tr>
-                    </thead>
-                    <tbody id="table_body"></tbody>
-                  </table>
-            </div>
-        </div>
-    </ng-container> -->
-
-</div>
-</ng-container>
-
-<ng-container *ngIf="divExcel">
-    <input type="file" name="file" class="custom-file-input" onchange="angular.element(this).scope().UploadFile(this.files)"  [(ngModel)]="request.excel"/>
-    <div class="col"> 
-        <input [(ngModel)]="request.ConnectionType" value="2">
-  
-        <button (click)="connectExcel()" class="btn btn-info px-4" type="button"
-        style="background:#124;color:#fff;border-radius:17%">{{ localization[loginData.language_index].connect
-        }}</button>
-    {{ connectionMessage }}
-
-    </div>
-    
 </ng-container>
