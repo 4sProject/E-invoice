@@ -116,7 +116,7 @@
                     [tableStyle]="{'min-width': '50rem'}">
                     <ng-template pTemplate="header">
                         <tr>
-                            <th style="width: 3rem"></th>
+                            <th style="width: 3rem"> </th>
                             <th>{{ localization[loginData.language_index].fieldName }}</th>
                             <th>{{ localization[loginData.language_index].fieldDataType }}</th>
                             <th>{{ localization[loginData.language_index].fieldIsStructureDataType }}</th>
@@ -126,6 +126,7 @@
                             <th>{{ localization[loginData.language_index].fieldDescreption }}</th>
                             <th>{{ localization[loginData.language_index].fieldDatabaseObjectName }}</th>
                             <th>{{ localization[loginData.language_index].fieldDatabaseColumnName }}</th>
+                            <th style="width: 3rem fit-content; position: fit-content;">PK</th> 
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-field let-expanded="expanded" let-rowIndex="rowIndex">
@@ -152,10 +153,17 @@
                                 <input pInputText type="text" [(ngModel)]="field.databaseObjectName"
                                     class="form-control" (change)="validateDatabaseObject($event, rowIndex, field)">
                             </td>
+
                             <td  >
-                                <input pInputText type="text" [(ngModel)]="field.databaseColumnName"
+                                <input pInputText type="text" [(ngModel)]="field.databaseColumnNameFK"
                                     class="form-control" (change)="validateDatabaseObject($event, rowIndex, field)">
                             </td>
+
+
+                            <td *ngIf="field.childFields !== null ">  <input pInputText type="text" [(ngModel)]="field.databaseColumnNamePK"
+                                    class="form-control" (change)="validateDatabaseObject($event, rowIndex, field)">
+                            </td>
+
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="rowexpansion" let-field>
@@ -175,6 +183,7 @@
                             <th>{{ localization[loginData.language_index].fieldDescreption }}</th>
                             <th>{{ localization[loginData.language_index].fieldDatabaseObjectName }}</th>
                             <th>{{ localization[loginData.language_index].fieldDatabaseColumnName }}</th>
+                            <th style="width: 3rem fit-content; position: fit-content;">PK</th> 
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-child let-expanded="expanded" let-rowIndex="rowIndex">
@@ -199,14 +208,20 @@
                             <td>{{ child.descreption[this.loginData.language_index] }}</td>
                             <td *ngIf="child.isStructureDataType"></td>
                             <td *ngIf="child.isStructureDataType"></td>
-                            <td *ngIf="!child.isStructureDataType">
+                            <td  >
                                 <input pInputText type="text" [(ngModel)]="child.databaseObjectName"
                                     class="form-control" (change)="validateDatabaseObject($event, rowIndex, child)">
                             </td>
-                            <td *ngIf="!child.isStructureDataType">
-                                <input pInputText type="text" [(ngModel)]="child.databaseColumnName"
+                            <td  >
+                                <input pInputText type="text" [(ngModel)]="child.databaseColumnNameFK"
                                     class="form-control" (change)="validateDatabaseObject($event, rowIndex, child)">
                             </td>
+                            
+                            <td *ngIf="child.childFields !== null">  
+                                <input  pInputText type="text" [(ngModel)]="child.databaseColumnNamePK"
+                                    class="form-control" (change)="validateDatabaseObject($event, rowIndex, child)">
+                        </td>
+
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="rowexpansion" let-child>
@@ -225,6 +240,7 @@
                             <th>{{ localization[loginData.language_index].fieldDescreption }}</th>
                             <th>{{ localization[loginData.language_index].fieldDatabaseObjectName }}</th>
                             <th>{{ localization[loginData.language_index].fieldDatabaseColumnName }}</th>
+                            <th style="width: 3rem fit-content; position: fit-content;">PK</th> 
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-child2 let-rowIndex="rowIndex">
@@ -242,17 +258,24 @@
                             <td>{{ child2.valueExample }}</td>
                             <td>{{ child2.descreption[this.loginData.language_index] }}</td>
                             <td *ngIf="child2.isStructureDataType"></td>
-                            <td *ngIf="child2.isStructureDataType"></td>
-                            <td *ngIf="!child2.isStructureDataType">
+                            <td *ngIf="child2.isStructureDataType"></td>    
+                            <td >
                                 <input pInputText type="text" [(ngModel)]="child2.databaseObjectName"
                                     class="form-control"
                                     (change)="validateDatabaseObject($event, rowIndex, child2)">
                             </td>
-                            <td *ngIf="!child2.isStructureDataType">
-                                <input pInputText type="text" [(ngModel)]="child2.databaseColumnName"
+                            <td  >
+                                <input pInputText type="text" [(ngModel)]="child2.databaseColumnNameFK"
                                     class="form-control"
                                     (change)="validateDatabaseObject($event, rowIndex, child2)">
                             </td>
+                            
+                            <td *ngIf="child2.childFields !== null">
+                                <input pInputText type="text" [(ngModel)]="child2.databaseColumnNamePK"
+                                    class="form-control"
+                                    (change)="validateDatabaseObject($event, rowIndex, child2)"> 
+                                </td>
+                        
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="emptymessage">
@@ -302,6 +325,8 @@
                             <th>{{ localization[loginData.language_index].fieldDescreption }}</th>
                             <th>{{ localization[loginData.language_index].fieldDatabaseObjectName }}</th>
                             <th>{{ localization[loginData.language_index].fieldDatabaseColumnName }}</th>
+                            <th style="width: 3rem fit-content; position: fit-content;">PK</th> 
+
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-field let-expanded="expanded" let-rowIndex="rowIndex">
@@ -329,9 +354,15 @@
                                     class="form-control" (change)="validateDatabaseObject($event, rowIndex, field)">
                             </td>
                             <td  >
-                                <input pInputText type="text" [(ngModel)]="field.databaseColumnName"
+                                <input pInputText type="text" [(ngModel)]="field.databaseColumnNameFK"
                                     class="form-control" (change)="validateDatabaseObject($event, rowIndex, field)">
                             </td>
+                            <td  >
+                                <input pInputText type="text" [(ngModel)]="field.databaseColumnNamePK"
+                                    class="form-control" (change)="validateDatabaseObject($event, rowIndex, field)">
+                            </td>
+                           
+
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="rowexpansion" let-field>
@@ -380,9 +411,14 @@
                                     class="form-control" (change)="validateDatabaseObject($event, rowIndex, child)">
                             </td>
                             <td *ngIf="!child.isStructureDataType">
-                                <input pInputText type="text" [(ngModel)]="child.databaseColumnName"
+                                <input pInputText type="text" [(ngModel)]="child.databaseColumnNameFK"
                                     class="form-control" (change)="validateDatabaseObject($event, rowIndex, child)">
                             </td>
+                            <td *ngIf="!child.isStructureDataType">
+                                <input pInputText type="text" [(ngModel)]="child.databaseColumnNamePK"
+                                    class="form-control" (change)="validateDatabaseObject($event, rowIndex, child)">
+                            
+
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="rowexpansion" let-child>
@@ -401,6 +437,7 @@
                             <th>{{ localization[loginData.language_index].fieldDescreption }}</th>
                             <th>{{ localization[loginData.language_index].fieldDatabaseObjectName }}</th>
                             <th>{{ localization[loginData.language_index].fieldDatabaseColumnName }}</th>
+                            <th style="width: 3rem fit-content; position: fit-content;">PK</th> 
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-child2 let-rowIndex="rowIndex">
@@ -425,10 +462,17 @@
                                     (change)="validateDatabaseObject($event, rowIndex, child2)">
                             </td>
                             <td *ngIf="!child2.isStructureDataType">
-                                <input pInputText type="text" [(ngModel)]="child2.databaseColumnName"
+                                <input pInputText type="text" [(ngModel)]="child2.databaseColumnNameFK"
                                     class="form-control"
                                     (change)="validateDatabaseObject($event, rowIndex, child2)">
                             </td>
+                            
+                            <td *ngIf="!child2.isStructureDataType">
+                                <input pInputText type="text" [(ngModel)]="child2.databaseColumnNamePK"
+                                    class="form-control"
+                                    (change)="validateDatabaseObject($event, rowIndex, child2)">
+                            </td>
+
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="emptymessage">

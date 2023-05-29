@@ -22,7 +22,7 @@ export class PrepaireSystemComponent extends generalComponentImports.Hellper{
     super();
     this.loginData = JSON.parse(sessionStorage['loginData']);
     if (this.loginData.access_token === '') this.router.navigate(['user/login']);
-    else this.request = { user_schema: 'Demo', password: 'demo', protocol: 'TCP', host: '10.8.2.154', port: 1521, server: '10.8.2.154', service_name: 'dotnet.lehaa.local', ConnectionType :'1' , excel_link : '' };
+    else this.request = { user_schema: 'Demo', password: 'demo', protocol: 'TCP', host: '10.8.2.154', port: 1521, server: '10.8.2.154', service_name: 'dotnet.lehaa.local', ConnectionType :'1' , excel_link : 'C:\\Users\\DELL\\Desktop\\Book1.xlsx' };
   }
   //#endregion
   //#region Angular Life Cycle
@@ -42,7 +42,7 @@ export class PrepaireSystemComponent extends generalComponentImports.Hellper{
   ShowoExcel(){
   this.divOracle=false;
   this.divExcel=true;
-  this.request = { user_schema: '', password: '', protocol: '', host: '', port: 0, server: '', service_name: '' , ConnectionType :'2', excel_link : '' };
+  this.request = { user_schema: '', password: '', protocol: '', host: '', port: 0, server: '', service_name: '' , ConnectionType :'2', excel_link : 'C:\\Users\\DELL\\Desktop\\Book1.xlsx' };
   this.isSuccessConnection = false;
   this.connectionMessage ='';
   }
