@@ -107,12 +107,12 @@
 
 
 <ng-container *ngIf="isSuccessConnection">
-    <div class="row g-4" style="height: auto; border: solid 4px;">
+    <div class="row g-4" style="height: 100%; border: solid 4px;">
         <p-tabView>
             <p-tabPanel header="{{ localization[loginData.language_index].eInvoiceConfiguration }}">
                 <p-table dataKey="name" [value]="configurationDocument.invoice.fields"
                     styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped" responsiveLayout="stack"
-                    [breakpoint]="'960px'" [scrollable]="true" scrollHeight="380px"
+                    [breakpoint]="'960px'" [scrollable]="true" scrollHeight="100%"
                     [tableStyle]="{'min-width': '50rem'}">
                     <ng-template pTemplate="header">
                         <tr>
@@ -126,7 +126,7 @@
                             <th>{{ localization[loginData.language_index].fieldDescreption }}</th>
                             <th>{{ localization[loginData.language_index].fieldDatabaseObjectName }}</th>
                             <th>{{ localization[loginData.language_index].fieldDatabaseColumnName }}</th>
-                            <th style="width: 3rem fit-content; position: fit-content;">PK</th> 
+                            <th>{{ localization[loginData.language_index].fieldDatabaseColumnNamePK }}</th> 
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-field let-expanded="expanded" let-rowIndex="rowIndex">
@@ -183,7 +183,7 @@
                             <th>{{ localization[loginData.language_index].fieldDescreption }}</th>
                             <th>{{ localization[loginData.language_index].fieldDatabaseObjectName }}</th>
                             <th>{{ localization[loginData.language_index].fieldDatabaseColumnName }}</th>
-                            <th style="width: 3rem fit-content; position: fit-content;">PK</th> 
+                            <th>{{ localization[loginData.language_index].fieldDatabaseColumnNamePK }}</th> 
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-child let-expanded="expanded" let-rowIndex="rowIndex">
@@ -206,8 +206,7 @@
                                 this.localization[this.loginData.language_index].no }}</td>
                             <td>{{ child.valueExample }}</td>
                             <td>{{ child.descreption[this.loginData.language_index] }}</td>
-                            <td *ngIf="child.isStructureDataType"></td>
-                            <td *ngIf="child.isStructureDataType"></td>
+                           
                             <td  >
                                 <input pInputText type="text" [(ngModel)]="child.databaseObjectName"
                                     class="form-control" (change)="validateDatabaseObject($event, rowIndex, child)">
@@ -240,7 +239,7 @@
                             <th>{{ localization[loginData.language_index].fieldDescreption }}</th>
                             <th>{{ localization[loginData.language_index].fieldDatabaseObjectName }}</th>
                             <th>{{ localization[loginData.language_index].fieldDatabaseColumnName }}</th>
-                            <th style="width: 3rem fit-content; position: fit-content;">PK</th> 
+                            <th>{{ localization[loginData.language_index].fieldDatabaseColumnNamePK }}</th> 
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-child2 let-rowIndex="rowIndex">
@@ -302,16 +301,16 @@
 </p-tabPanel>
 <p-tabPanel header="{{ localization[loginData.language_index].branchesConfiguration }}">
 </p-tabPanel>
-<p-tabPanel header="{{ localization[loginData.language_index].userConfiguration }}">
+  <!-- <p-tabPanel header="{{ localization[loginData.language_index].userConfiguration }}">
 </p-tabPanel>
 <p-tabPanel header="{{ localization[loginData.language_index].userPermissionsConfiguration }}">
 </p-tabPanel>
 <p-tabPanel header="{{ localization[loginData.language_index].posConfiguration }}">
-</p-tabPanel>
+</p-tabPanel> -->
 <p-tabPanel header="{{ localization[loginData.language_index].eReceiptConfiguration }}">
 <p-table dataKey="name" [value]="configurationDocument.receipt.fields"
                     styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped" responsiveLayout="stack"
-                    [breakpoint]="'960px'" [scrollable]="true" scrollHeight="380px"
+                    [breakpoint]="'100%'" [scrollable]="true" scrollHeight="100%"
                     [tableStyle]="{'min-width': '50rem'}">
                     <ng-template pTemplate="header">
                         <tr>
@@ -325,7 +324,7 @@
                             <th>{{ localization[loginData.language_index].fieldDescreption }}</th>
                             <th>{{ localization[loginData.language_index].fieldDatabaseObjectName }}</th>
                             <th>{{ localization[loginData.language_index].fieldDatabaseColumnName }}</th>
-                            <th style="width: 3rem fit-content; position: fit-content;">PK</th> 
+                            <th>{{ localization[loginData.language_index].fieldDatabaseColumnNamePK }}</th> 
 
                         </tr>
                     </ng-template>
@@ -437,7 +436,7 @@
                             <th>{{ localization[loginData.language_index].fieldDescreption }}</th>
                             <th>{{ localization[loginData.language_index].fieldDatabaseObjectName }}</th>
                             <th>{{ localization[loginData.language_index].fieldDatabaseColumnName }}</th>
-                            <th style="width: 3rem fit-content; position: fit-content;">PK</th> 
+                            <th>{{ localization[loginData.language_index].fieldDatabaseColumnNamePK }}</th> 
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-child2 let-rowIndex="rowIndex">
@@ -496,8 +495,7 @@
 </tr>
 </ng-template>
 </p-table>
-</p-tabPanel>
-
+</p-tabPanel> 
 </p-tabView>
 </div>
 </ng-container>
